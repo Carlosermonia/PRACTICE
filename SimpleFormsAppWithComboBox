@@ -1,0 +1,108 @@
+ //  3  WARNINGS MIGHT SOLVE LATER  
+// Converting null literal or possible null value to non-nullable type. LINE 42
+// Dereference of a possibly null reference. LINE 44
+//   Possible null reference argument for parameter 'value' in 'void ObjectCollection.Remove(object value)'. LINE88  
+
+namespace SimpleFormsAppWithComboBox
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+            string[] cuisineGenre = { "Filipino", "Chinese", "German", "Italian" };
+            cuisinebox.Items.AddRange(cuisineGenre);
+
+            cuisinebox.DropDownStyle = ComboBoxStyle.DropDownList;
+            cuisinebox.SelectedIndex = 0;
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void selectbtn_Click(object sender, EventArgs e)
+        {
+            string[] filipinoCuisineList = { "Pancit Canton", "Nilat-ang Baka", "Nguyong", "Fried Siomai", "Pritong Aso" };
+            string[] chineseCuisineList = { "Udon", "Shandong", "Sichuan", "Cantonese" };
+            string[] germanCuisineList = { "Schnitzel", "Currywurst", "Bratwurst" };
+            string[] italianCuisineList = { "Pasta", "Pizza", "Risotto", "Tiramisu" };
+
+            foodlistchcklstbox.Items.Clear();
+
+            if (cuisinebox.SelectedItem != null)
+            {
+                string selectedCuisine = cuisinebox.SelectedItem.ToString();
+
+                if (selectedCuisine.Contains("Filipino"))
+                {
+                    foodlistchcklstbox.Items.AddRange(filipinoCuisineList);
+                }
+                else if (selectedCuisine.Contains("Chinese"))
+                {
+                    foodlistchcklstbox.Items.AddRange(chineseCuisineList);
+                }
+                else if (selectedCuisine.Contains("German"))
+                {
+                    foodlistchcklstbox.Items.AddRange(germanCuisineList);
+                }
+                else if (selectedCuisine.Contains("Italian"))
+                {
+                    foodlistchcklstbox.Items.AddRange(italianCuisineList);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a cuisine.");
+            }
+        }
+
+        private void foodlistchcklstbox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addbtn_Click(object sender, EventArgs e)
+        {
+            foreach (var item in foodlistchcklstbox.Items)
+            {
+                bool isSelected = foodlistchcklstbox.GetItemChecked(foodlistchcklstbox.Items.IndexOf(item));
+                if (isSelected && !foodlstbox.Items.Contains(item))
+                {
+                    foodlstbox.Items.Add(item);
+                }
+            }
+        }
+
+        private void removebtn_Click(object sender, EventArgs e)
+        {
+            if (foodlstbox.Items.Count >= 1)
+            {
+                foodlstbox.Items.Remove(foodlstbox.SelectedItem);
+            }
+        }
+
+        private void foodlstbox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void clrbtn_Click(object sender, EventArgs e)
+        {
+            foodlstbox.Items.Clear();
+        }
+    }
+}
+
